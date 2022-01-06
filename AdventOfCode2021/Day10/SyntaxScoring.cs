@@ -35,7 +35,51 @@ namespace AdventOfCode2021.Day10
 
         internal override string GetSecondResult(string inputText)
         {
-            return "";
+            List<long> scores = new List<long>();
+            foreach (var line in inputText.Split("\r\n"))
+            {
+                var stack = new Stack<char>();
+                for (int i = 0; i < line.Length; i++)
+                {
+                    if (line[i] is '(' or '<' or '[' or '{')
+                    {
+                        stack.Push(line[i]);
+                        continue;
+                    }
+
+                    var expected = stack.Pop();
+                    if (expected != Convert.ToChar(line[i] - 1) && expected != Convert.ToChar(line[i] - 2))
+                    {
+                        
+                        stack = new Stack<char>();
+                        break;
+                    }
+                }
+
+                if(stack.Count != 0) 
+                    scores.Add(CalculateScore(stack));
+
+            }
+
+            return scores.OrderBy(x => x).ElementAt(scores.Count / 2).ToString();
+        }
+
+        private long CalculateScore(Stack<char> stack)
+        {
+            long score = 0;
+            char popped;
+            while(stack.TryPop(out popped))
+            {
+                score *= 5;
+                score += popped switch
+                {
+                    '(' => 1,
+                    '[' => 2,
+                    '{' => 3,
+                    '<' => 4,
+                };
+            }
+            return score;
         }
     }
 }
