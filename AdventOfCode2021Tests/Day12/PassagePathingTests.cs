@@ -66,14 +66,16 @@ start-RW
 
             Assert.Equal("10", result);
         }
-        
+
+        [Fact()]
         public void GetFirstResult_ForSecondInputTest()
         {
             var result = _sut.GetFirstResult(_secondTestInput);
 
             Assert.Equal("19", result);
         }
-        
+
+        [Fact()]
         public void GetFirstResult_ForThirdInputTest()
         {
             var result = _sut.GetFirstResult(_thirdTestInput);
@@ -82,11 +84,27 @@ start-RW
         }
 
         [Fact()]
-        public void GetSecondResultTest()
+        public void GetSecondResult_ForFirstInputTest()
         {
             var result = _sut.GetSecondResult(_firstTestInput);
 
-            Assert.Equal("", result);
+            Assert.Equal("36", result);
+        }
+
+        [Fact()]
+        public void GetSecondResult_ForSecondInputTest()
+        {
+            var result = _sut.GetSecondResult(_secondTestInput);
+
+            Assert.Equal("103", result);
+        }
+        
+        [Fact()]
+        public void GetSecondResult_ForThirdInputTest()
+        {
+            var result = _sut.GetSecondResult(_thirdTestInput);
+
+            Assert.Equal("3509", result);
         }
     }
 }
