@@ -50,7 +50,7 @@ CN -> C
         {
             var result = _sut.GetSecondResult(_testInput);
 
-            Assert.Equal("-1", result);
+            Assert.Equal("2188189693529", result);
         }
     }
 }
