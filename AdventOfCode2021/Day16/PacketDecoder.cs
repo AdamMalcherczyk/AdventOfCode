@@ -87,6 +87,30 @@ namespace AdventOfCode2021.Day16
             return mainPacket.TotalVersionSum.ToString();
         }
 
+        internal override string GetSecondResult(string inputText)
+        {
+            Queue<bool> bits = new Queue<bool>();
+            var bytes = StringToByteArray(inputText);
+            foreach (var word in bytes)
+            {
+                for (int i = 7; i >= 0; i--)
+                {
+                    bits.Enqueue((word >> i) % 2 == 1);
+                }
+            }
+
+            Packet mainPacket = ParsePacket(bits);
+            return mainPacket.Value.ToString();
+        }
+
+        private byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
+
         private Packet ParsePacket(Queue<bool> bits)
         {
             var packet = new Packet();
@@ -136,42 +160,13 @@ namespace AdventOfCode2021.Day16
             long result = initialResult;
             for (int i = 0; i < numberOfBits; i++)
             {
+                result = result << 1;
                 if (bits.Dequeue())
                 {
-                    result = result << 1;
                     result += 1;
                 }
-                else
-                {
-                    result = result << 1;
-                }
-                
             }
             return result;
-        }
-
-        internal override string GetSecondResult(string inputText)
-        {
-            Queue<bool> bits = new Queue<bool>();
-            var bytes = StringToByteArray(inputText);
-            foreach (var word in bytes)
-            {
-                for (int i = 7; i >= 0; i--)
-                {
-                    bits.Enqueue((word >> i) % 2 == 1);
-                }
-            }
-
-            Packet mainPacket = ParsePacket(bits);
-            return mainPacket.Value.ToString();
-        }
-
-        private byte[] StringToByteArray(string hex)
-        {
-            return Enumerable.Range(0, hex.Length)
-                             .Where(x => x % 2 == 0)
-                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-                             .ToArray();
         }
     }
 }
