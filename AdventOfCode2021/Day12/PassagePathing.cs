@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2021.Day12
 {
+    //TODO change Array to Queue/Stack - more optimal
     internal class PassagePathing : Base
     {
         internal override string GetFirstResult(string inputText)
