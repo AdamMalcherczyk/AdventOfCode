@@ -161,7 +161,7 @@ namespace AdventOfCode2021.Day17
                 }
             }
 
-            var initialVelocities = xSpeeds.Where(x => x.Landed == false).GroupJoin(ySpeeds, x => x.Iteration, y => y.Iteration, Test).SelectMany(x => x);
+            var initialVelocities = xSpeeds.Where(x => x.Landed == false).GroupJoin(ySpeeds, x => x.Iteration, y => y.Iteration, GroupJoinResultSelection).SelectMany(x => x);
             foreach (var xSpeed in xSpeeds.Where(x => x.Landed))
             {
                 initialVelocities = initialVelocities.Union(ySpeeds.Where(x => x.Iteration >= xSpeed.Iteration).Select(x => new InitialVelocity(xSpeed.Value, x.Value)));
@@ -173,7 +173,7 @@ namespace AdventOfCode2021.Day17
             return initialVelocities.Count().ToString();
         }
 
-        private List<InitialVelocity> Test(PossibleInitialSpeed xSpeed, IEnumerable<object> ySpeeds)
+        private List<InitialVelocity> GroupJoinResultSelection(PossibleInitialSpeed xSpeed, IEnumerable<object> ySpeeds)
         {
             var result = new List<InitialVelocity>();
             foreach (PossibleInitialSpeed ySpeed in ySpeeds)
