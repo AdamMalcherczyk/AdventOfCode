@@ -33,7 +33,6 @@ namespace AdventOfCode2021Tests.Day15
         public void GetFirstResultTest()
         {
             var result = _sut.GetFirstResult(_testInput);
-
             Assert.Equal("40", result);
         }
 

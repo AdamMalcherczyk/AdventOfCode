@@ -32,7 +32,7 @@ namespace AdventOfCode2021Tests.Day17
         {
             var result = _sut.GetSecondResult(_testInput);
 
-            Assert.Equal("-1", result);
+            Assert.Equal("112", result);
         }
     }
 }
