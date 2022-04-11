@@ -44,6 +44,12 @@ namespace AdventOfCode2021.Day18
             {
                 if (input[i] == '[')
                 {
+                    if (i > 0 && input[i - 1] == ',')
+                    {
+                        tempPair.NestLevel = nestLevel;
+                        result.Pairs.Add(tempPair);
+                        tempPair = new Pair();
+                    }
                     nestLevel++;
                     addPair = true;
                 }
@@ -54,6 +60,12 @@ namespace AdventOfCode2021.Day18
                         tempPair.Right = new Pair();
                         tempPair.Right.Value = tempNumber;
                         tempPair.NestLevel = nestLevel;
+                        
+                        if(result.Pairs.Count >= 1 && result.Pairs.Last().Right == null)
+                        {
+                            result.Pairs.Last().Right = tempPair;
+                        }
+
                         result.Pairs.Add(tempPair);
                         tempPair = new Pair();
                         tempNumber = 0;
