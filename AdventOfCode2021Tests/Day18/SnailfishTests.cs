@@ -22,13 +22,25 @@ namespace AdventOfCode2021Tests.Day18
         [InlineData("[[[1,2]]]", 2, 1, 2)]
         [InlineData("[[[[1,2]]]]", 3, 1, 2)]
         [InlineData("[[[[[1,2]]]]]", 4, 1, 2)]
-        public void InputReadTest(string input, int nestLevel, int leftValue, int rightValue)
+        public void InputReadSinglePairTest(string input, int nestLevel, int leftValue, int rightValue)
         {
             var parsed = _sut.Parse(input);
             Assert.Equal(nestLevel, parsed.Pairs[0].NestLevel);
             Assert.Equal(leftValue, parsed.Pairs[0].Left.Value);
             Assert.Equal(rightValue, parsed.Pairs[0].Right.Value);
             Assert.Single(parsed.Pairs);
+        }
+
+        [Fact()]
+        public void InputReadPairAndNumberTest()
+        {
+            var parsed = _sut.Parse("[[3,6],9]");
+            Assert.Equal(1, parsed.Pairs[0].NestLevel);
+            Assert.Equal(3, parsed.Pairs[0].Left.Value);
+            Assert.Equal(6, parsed.Pairs[0].Right.Value);
+            Assert.Equal(2, parsed.Pairs.Count);
+            Assert.Equal(parsed.Pairs[0], parsed.Pairs[1].Left);
+            Assert.Equal(9, parsed.Pairs[1].Right.Value);
         }
 
         [Fact()]
