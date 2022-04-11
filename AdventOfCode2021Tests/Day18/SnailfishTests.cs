@@ -17,15 +17,18 @@ namespace AdventOfCode2021Tests.Day18
         }
 
         [Theory()]
-        [InlineData("[1,2]", 0)]
-        [InlineData("[[1,2]]", 1)]
-        [InlineData("[[[1,2]]]", 2)]
-        [InlineData("[[[[1,2]]]]", 3)]
-        [InlineData("[[[[[1,2]]]]]", 4)]
-        public void InputReadTest(string input, int nestLevel)
+        [InlineData("[1,2]", 0, 1, 2)]
+        [InlineData("[[1,2]]", 1, 1, 2)]
+        [InlineData("[[[1,2]]]", 2, 1, 2)]
+        [InlineData("[[[[1,2]]]]", 3, 1, 2)]
+        [InlineData("[[[[[1,2]]]]]", 4, 1, 2)]
+        public void InputReadTest(string input, int nestLevel, int leftValue, int rightValue)
         {
             var parsed = _sut.Parse(input);
-            Assert.Equal(nestLevel, parsed.Numbers[0].NestLevel)
+            Assert.Equal(nestLevel, parsed.Pairs[0].NestLevel);
+            Assert.Equal(leftValue, parsed.Pairs[0].Left.Value);
+            Assert.Equal(rightValue, parsed.Pairs[0].Right.Value);
+            Assert.Single(parsed.Pairs);
         }
 
         [Fact()]
