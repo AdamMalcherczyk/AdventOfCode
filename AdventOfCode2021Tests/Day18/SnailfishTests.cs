@@ -41,6 +41,20 @@ namespace AdventOfCode2021Tests.Day18
             Assert.Equal(2, parsed.Pairs.Count);
             Assert.Equal(parsed.Pairs[0], parsed.Pairs[1].Left);
             Assert.Equal(9, parsed.Pairs[1].Right.Value);
+            Assert.Equal(0, parsed.Pairs[1].NestLevel);
+        }
+        
+        [Fact()]
+        public void InputReadNumberAndPairTest()
+        {
+            var parsed = _sut.Parse("[3,[6,9]]");
+            Assert.Equal(0, parsed.Pairs[0].NestLevel);
+            Assert.Equal(3, parsed.Pairs[0].Left.Value);
+            Assert.Equal(parsed.Pairs[1], parsed.Pairs[0].Right);
+            Assert.Equal(2, parsed.Pairs.Count);
+            Assert.Equal(6, parsed.Pairs[1].Left.Value);
+            Assert.Equal(9, parsed.Pairs[1].Right.Value);
+            Assert.Equal(1, parsed.Pairs[1].NestLevel);
         }
 
         [Fact()]
