@@ -56,6 +56,73 @@ namespace AdventOfCode2021Tests.Day18
             Assert.Equal(9, parsed.Pairs[1].Right.Value);
             Assert.Equal(1, parsed.Pairs[1].NestLevel);
         }
+        
+        [Fact()]
+        public void InputReadComplicatedTest()
+        {
+            var parsed = _sut.Parse("[[[[[9,8],1],2],3],4]");
+            Assert.Equal(5, parsed.Pairs.Count);
+            Assert.Equal(4, parsed.Pairs[0].NestLevel);
+            Assert.Equal(9, parsed.Pairs[0].Left.Value);
+            Assert.Equal(8, parsed.Pairs[0].Right.Value);
+            
+            Assert.Equal(3, parsed.Pairs[1].NestLevel);
+            Assert.Equal(parsed.Pairs[0], parsed.Pairs[1].Left);
+            Assert.Equal(1, parsed.Pairs[1].Right.Value);
+
+            Assert.Equal(2, parsed.Pairs[2].NestLevel);
+            Assert.Equal(parsed.Pairs[1], parsed.Pairs[2].Left);
+            Assert.Equal(2, parsed.Pairs[2].Right.Value);
+
+            Assert.Equal(1, parsed.Pairs[3].NestLevel);
+            Assert.Equal(parsed.Pairs[2], parsed.Pairs[3].Left);
+            Assert.Equal(3, parsed.Pairs[3].Right.Value);
+
+            Assert.Equal(0, parsed.Pairs[4].NestLevel);
+            Assert.Equal(parsed.Pairs[3], parsed.Pairs[4].Left);
+            Assert.Equal(4, parsed.Pairs[4].Right.Value);
+        }
+        
+        [Fact()]
+        public void InputReadAnotherComplicatedTest()
+        {
+            var parsed = _sut.Parse("[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]");
+            Assert.Equal(1, parsed.Pairs[0].NestLevel);
+            Assert.Equal(3, parsed.Pairs[0].Left.Value);
+            Assert.Equal(parsed.Pairs[1], parsed.Pairs[0].Right);
+            
+            Assert.Equal(2, parsed.Pairs[1].NestLevel);
+            Assert.Equal(2, parsed.Pairs[1].Left.Value);
+            Assert.Equal(parsed.Pairs[2], parsed.Pairs[1].Right);
+
+            Assert.Equal(3, parsed.Pairs[2].NestLevel);
+            Assert.Equal(1, parsed.Pairs[2].Left.Value);
+            Assert.Equal(parsed.Pairs[3], parsed.Pairs[2].Right);
+
+            Assert.Equal(4, parsed.Pairs[3].NestLevel);
+            Assert.Equal(7, parsed.Pairs[3].Left.Value);
+            Assert.Equal(3, parsed.Pairs[3].Right.Value);
+
+            Assert.Equal(0, parsed.Pairs[4].NestLevel);
+            Assert.Equal(parsed.Pairs[3], parsed.Pairs[4].Left);
+            Assert.Equal(parsed.Pairs[5], parsed.Pairs[4].Right);
+
+            Assert.Equal(1, parsed.Pairs[5].NestLevel);
+            Assert.Equal(6, parsed.Pairs[5].Left.Value);
+            Assert.Equal(parsed.Pairs[6], parsed.Pairs[5].Right);
+
+            Assert.Equal(2, parsed.Pairs[6].NestLevel);
+            Assert.Equal(5, parsed.Pairs[6].Left.Value);
+            Assert.Equal(parsed.Pairs[7], parsed.Pairs[6].Right);
+
+            Assert.Equal(3, parsed.Pairs[7].NestLevel);
+            Assert.Equal(4, parsed.Pairs[7].Left.Value);
+            Assert.Equal(parsed.Pairs[8], parsed.Pairs[7].Right);
+
+            Assert.Equal(4, parsed.Pairs[8].NestLevel);
+            Assert.Equal(3, parsed.Pairs[8].Left.Value);
+            Assert.Equal(2, parsed.Pairs[8].Right.Value);
+        }
 
         [Fact()]
         public void NestedFourLeftMostNumber_PairExplosionLeftNumberIsOutTest()
