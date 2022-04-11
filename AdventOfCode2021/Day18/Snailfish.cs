@@ -72,8 +72,15 @@ namespace AdventOfCode2021.Day18
 
                 else if (input[i] == ',')
                 {
-                    tempPair.Left = new Pair();
-                    tempPair.Left.Value = tempNumber;
+                    if (addPair)
+                    {
+                        tempPair.Left = new Pair();
+                        tempPair.Left.Value = tempNumber;
+                    }
+                    else
+                    {
+                        tempPair.Left = result.Pairs.Last();
+                    }
                     tempNumber = 0;
                     addPair = true;
                 }
