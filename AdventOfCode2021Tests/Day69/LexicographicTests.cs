@@ -14,7 +14,7 @@ namespace AdventOfCode2021Tests.Day69
         [Fact()]
         public void GetOneResultTest()
         {
-            var result = _sut.GetFirstResult("3");
+            var result = _sut.GetFirstResult("1");
 
             Assert.Equal("1", result);
         }
@@ -22,7 +22,7 @@ namespace AdventOfCode2021Tests.Day69
         [Fact()]
         public void GetTwoResultTest()
         {
-            var result = _sut.GetFirstResult("3");
+            var result = _sut.GetFirstResult("2");
 
             Assert.Equal("2\r\n1 1", result);
         }
