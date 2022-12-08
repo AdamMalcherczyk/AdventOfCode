@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace AdventOfCode2021.Day05
 {
     internal class HydrothermalVenture : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var lines = inputText.Split("\r\n");
             var board = new Dictionary<(int, int), int>();
@@ -45,7 +46,7 @@ namespace AdventOfCode2021.Day05
             return board.Values.Count(x => x > 1).ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             var lines = inputText.Split("\r\n");
             var board = new Dictionary<(int, int), int>();

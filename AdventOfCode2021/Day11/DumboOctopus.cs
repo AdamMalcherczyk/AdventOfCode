@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace AdventOfCode2021.Day11
     {
         private int[][] _octopuses;
 
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             Initialize(inputText);
             var result = PerformNumberOfSteps(100);
@@ -19,7 +20,7 @@ namespace AdventOfCode2021.Day11
             return result.ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             Initialize(inputText);
             int result = WaitForOctopusesToSynchronize();

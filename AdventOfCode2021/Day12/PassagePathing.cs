@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +12,7 @@ namespace AdventOfCode2021.Day12
     //TODO change Array to Queue/Stack - more optimal
     internal class PassagePathing : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var connectionsRaw = inputText.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x => x.Split("-"));
 
@@ -58,7 +59,7 @@ namespace AdventOfCode2021.Day12
             return result;
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             var connectionsRaw = inputText.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x => x.Split("-"));
 

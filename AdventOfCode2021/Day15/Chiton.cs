@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace AdventOfCode2021.Day15
 {
     internal class Chiton : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var rows = inputText.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
             var risks = rows.Select(x => x.ToCharArray()).Select(x => x.Select(y => y - '0').ToArray()).ToArray();
@@ -21,7 +22,7 @@ namespace AdventOfCode2021.Day15
             return totals[totals.GetLength(0) - 1, totals.GetLength(1) - 1].ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             var rows = inputText.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
             var risks = rows.Select(x => x.ToCharArray()).Select(x => x.Select(y => y - '0').ToArray()).ToArray();

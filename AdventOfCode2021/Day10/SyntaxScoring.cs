@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace AdventOfCode2021.Day10
 {
     internal class SyntaxScoring : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             Dictionary<char, int> corrupted = new Dictionary<char, int>() { { ')', 0 }, { '>', 0 }, { ']', 0 }, { '}', 0 } };
             foreach (var line in inputText.Split("\r\n"))
@@ -33,7 +34,7 @@ namespace AdventOfCode2021.Day10
             return (corrupted[')'] * 3 + corrupted[']'] * 57 + corrupted['}'] * 1197 + corrupted['>'] * 25137).ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             List<long> scores = new List<long>();
             foreach (var line in inputText.Split("\r\n"))

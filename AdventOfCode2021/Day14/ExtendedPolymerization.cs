@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace AdventOfCode2021.Day14
 {
     internal class ExtendedPolymerization : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             string polymerRaw;
             Dictionary<string, string> extensions;
@@ -29,7 +30,7 @@ namespace AdventOfCode2021.Day14
         }
 
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             string polymerRaw;
             Dictionary<string, string> extensions;

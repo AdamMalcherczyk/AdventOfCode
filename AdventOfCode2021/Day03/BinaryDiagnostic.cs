@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace AdventOfCode2021.Day03
 {
     internal class BinaryDiagnostic : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             int result = 0, gamma = 0, epsilon = 0;
 
@@ -36,7 +37,7 @@ namespace AdventOfCode2021.Day03
             return result.ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             int result = 0, oxygen = 0, co2 = 0;
 

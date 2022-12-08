@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace AdventOfCode2021.Day07
 {
     internal class TheTreacheryOfWhales : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var crabs = inputText.Split(',').Select(x => int.Parse(x)).ToList();
             var crabLength = crabs.Count;
@@ -26,7 +27,7 @@ namespace AdventOfCode2021.Day07
             return crabs.Select(x => Math.Abs(x - mostEfficient)).Sum().ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             Dictionary<int, int> cost = new Dictionary<int, int>();
             var crabs = inputText.Split(',').Select(x => int.Parse(x)).ToList();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,13 @@ namespace AdventOfCode2021.Day08
 {
     internal class SevenSegmentSearch : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var outputs = inputText.Split("\r\n").SelectMany(x => x.Split('|')[1].Split(' '));
             return outputs.Count(x => x.Length == 2 || x.Length == 4 || x.Length == 3 || x.Length == 7).ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             var inputs = inputText.Split("\r\n");
 

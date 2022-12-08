@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace AdventOfCode2021.Day04
 {
     internal class GiantSquid : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var input = new Input(inputText);
             foreach (var number in input.NumberSequence)
@@ -36,7 +37,7 @@ namespace AdventOfCode2021.Day04
             return "";
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             var input = new Input(inputText);
             foreach (var number in input.NumberSequence)

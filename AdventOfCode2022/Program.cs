@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("AdventOfCode2021Tests")]
+[assembly: InternalsVisibleTo("AdventOfCode2022Tests")]
 
 bool wrongInputTryAgain = true;
 int day = 0;
@@ -24,9 +24,9 @@ do
     }
 } while (wrongInputTryAgain);
 
-var childTypes = Assembly.Load($"AdventOfCode2021").GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Base)));
+var childTypes = Assembly.Load($"AdventOfCode2022").GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Base)));
 
-var concrteClass = childTypes.FirstOrDefault(x => x.Namespace == $"AdventOfCode2021.Day{day:00}");
+var concrteClass = childTypes.FirstOrDefault(x => x.Namespace == $"AdventOfCode2022.Day{day:00}");
 
 if (concrteClass == null)
 {

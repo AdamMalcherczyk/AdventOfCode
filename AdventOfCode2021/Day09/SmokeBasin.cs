@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace AdventOfCode2021.Day09
 {
     internal class SmokeBasin : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var rows = inputText.Split("\r\n");
             int[,] hackedField = new int[rows.Length + 2, rows[0].Length + 2];
@@ -32,7 +33,7 @@ namespace AdventOfCode2021.Day09
             return (lowPoints.Sum() + lowPoints.Count()).ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             var rows = inputText.Split("\r\n");
             int[,] hackedField = new int[rows.Length + 2, rows[0].Length + 2];

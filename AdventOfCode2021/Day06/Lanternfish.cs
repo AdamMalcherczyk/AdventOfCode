@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace AdventOfCode2021.Day06
 {
     internal class Lanternfish : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var fish = inputText.Split(',').Select(x => x[0] - '0').ToList();
             Dictionary<int, int> fishes = new Dictionary<int, int>();
@@ -31,7 +32,7 @@ namespace AdventOfCode2021.Day06
             return fishes.Values.Sum().ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             var fish = inputText.Split(',').Select(x => x[0] - '0').ToList();
             Dictionary<int, long> fishes = new Dictionary<int, long>();

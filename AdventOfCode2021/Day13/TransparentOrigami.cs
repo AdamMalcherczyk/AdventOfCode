@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -49,7 +50,7 @@ namespace AdventOfCode2021.Day13
 
     internal class TransparentOrigami : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             IEnumerable<Fold> folds;
             HashSet<Dot> dots;
@@ -60,7 +61,7 @@ namespace AdventOfCode2021.Day13
             return dots.Count.ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             IEnumerable<Fold> folds;
             HashSet<Dot> dots;

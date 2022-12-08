@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace AdventOfCode2021.Day17
 {
     internal class TrickShot : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             var yRange = inputText.Split(":")[1].Split(",")[1].Split("=")[1].Split("..");
             var yMin = int.Parse(yRange[0]);
@@ -70,7 +71,7 @@ namespace AdventOfCode2021.Day17
             }
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             var xRange = inputText.Split(":")[1].Split(",")[0].Split("=")[1].Split("..");
             var xMin = int.Parse(xRange[0]);

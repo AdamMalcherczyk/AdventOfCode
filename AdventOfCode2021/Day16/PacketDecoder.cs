@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -71,7 +72,7 @@ namespace AdventOfCode2021.Day16
 
     internal class PacketDecoder : Base
     {
-        internal override string GetFirstResult(string inputText)
+        public override string GetFirstResult(string inputText)
         {
             Queue<bool> bits = new Queue<bool>();
             var bytes = StringToByteArray(inputText);
@@ -87,7 +88,7 @@ namespace AdventOfCode2021.Day16
             return mainPacket.TotalVersionSum.ToString();
         }
 
-        internal override string GetSecondResult(string inputText)
+        public override string GetSecondResult(string inputText)
         {
             Queue<bool> bits = new Queue<bool>();
             var bytes = StringToByteArray(inputText);
