@@ -65,7 +65,7 @@ humidity-to-location map:
         {
             var result = _sut.GetSecondResult(_testInput);
 
-            Assert.Equal("??", result);
+            Assert.Equal("46", result);
         }
     }
 }
