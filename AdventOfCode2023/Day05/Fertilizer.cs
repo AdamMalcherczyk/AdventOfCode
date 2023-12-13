@@ -12,31 +12,58 @@ namespace AdventOfCode2023.Day05
     {
         class Range
         {
-            public Range(int sourceStart, int destinationStart, int length)
+            public Range(long sourceStart, long destinationStart, long length)
             {
                 SourceStart = sourceStart;
                 DestinationStart = destinationStart;
                 Length = length;
             }
 
-            public int SourceStart { get; set; }
-            public int DestinationStart { get; set; }
-            public int Length { get; set; }
+            public long SourceStart { get; set; }
+            public long DestinationStart { get; set; }
+            public long Length { get; set; }
         }
 
         public override string GetFirstResult(string inputText)
         {
             var splitted = inputText.Split("\r\n\r\n");
-            int result = 0;
+            long result = long.MaxValue;
 
-            var seeds = splitted[0].Split(':')[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x));
-            var seedToSoilRangs = splitted[1].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var soilToFertilizerRangs = splitted[2].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var fertilizerToWaterRangs = splitted[3].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var waterToLightRangs = splitted[4].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var lightToTemperatureRangs = splitted[5].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var temperatureToHumidityRangs = splitted[6].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var humidityToLocationRangs = splitted[7].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var seeds = splitted[0].Split(':')[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => long.Parse(x));
+            var seedToSoilRangs = splitted[1].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var soilToFertilizerRangs = splitted[2].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var fertilizerToWaterRangs = splitted[3].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var waterToLightRangs = splitted[4].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var lightToTemperatureRangs = splitted[5].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var temperatureToHumidityRangs = splitted[6].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var humidityToLocationRangs = splitted[7].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+
+            var maps = new List<IEnumerable<Range>>() 
+            { 
+                seedToSoilRangs,
+                soilToFertilizerRangs,
+                fertilizerToWaterRangs,
+                waterToLightRangs,
+                lightToTemperatureRangs,
+                temperatureToHumidityRangs,
+                humidityToLocationRangs 
+            };
+
+            foreach (var seed in seeds)
+            {
+                var currentValue = seed;
+                foreach (var ranges in maps)
+                {
+                    var validRange = ranges.FirstOrDefault(x => currentValue >= x.SourceStart && currentValue < (x.SourceStart + x.Length));
+
+                    if (validRange == null)
+                        continue;
+
+                    currentValue -= (validRange.SourceStart - validRange.DestinationStart);
+                }
+
+                result = Math.Min(result, currentValue);
+            }
 
             return result.ToString();
         }
@@ -44,16 +71,16 @@ namespace AdventOfCode2023.Day05
         public override string GetSecondResult(string inputText)
         {
             var splitted = inputText.Split("\r\n\r\n");
-            int result = 0;
+            long result = 0;
 
-            var seeds = splitted[0].Split(':')[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x));
-            var seedToSoilRangs = splitted[1].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var soilToFertilizerRangs = splitted[2].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var fertilizerToWaterRangs = splitted[3].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var waterToLightRangs = splitted[4].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var lightToTemperatureRangs = splitted[5].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var temperatureToHumidityRangs = splitted[6].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
-            var humidityToLocationRangs = splitted[7].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => int.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var seeds = splitted[0].Split(':')[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => long.Parse(x));
+            var seedToSoilRangs = splitted[1].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var soilToFertilizerRangs = splitted[2].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var fertilizerToWaterRangs = splitted[3].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var waterToLightRangs = splitted[4].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var lightToTemperatureRangs = splitted[5].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var temperatureToHumidityRangs = splitted[6].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
+            var humidityToLocationRangs = splitted[7].Split("\r\n").Skip(1).Select(x => x.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(y => long.Parse(y)).ToArray()).Select(x => new Range(x[1], x[0], x[2]));
 
             return result.ToString();
         }
